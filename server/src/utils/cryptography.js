@@ -1,19 +1,8 @@
 const crypto = require("crypto");
-const fs = require("fs");
-const path = require("path");
 const CryptoJS = require("crypto-js");
-
-const getPublicKey = () => {
-  const publicKeyPath = path.join(__dirname, "../keys/public.pem");
-  const publicKey = fs.readFileSync(publicKeyPath);
-
-  return publicKey;
-};
+const { publicKey, privateKey } = require("../keys");
 
 const privateDecrypt = (key) => {
-  const privateKeyPath = path.join(__dirname, "../keys/private.pem");
-  const privateKey = fs.readFileSync(privateKeyPath);
-
   const decryptedKey = crypto.privateDecrypt(
     {
       key: privateKey,
@@ -27,8 +16,6 @@ const privateDecrypt = (key) => {
 };
 
 const publicEncrypt = (key) => {
-  const publicKey = getPublicKey();
-
   const encryptedData = crypto.publicEncrypt(
     {
       key: publicKey,
@@ -55,7 +42,6 @@ const decryptAES = (cipherText, key) => {
 };
 
 module.exports = {
-  getPublicKey,
   privateDecrypt,
   publicEncrypt,
   encryptAES,
