@@ -1,0 +1,19 @@
+{
+  "name": "encryption-end-to-end",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "cd server && npm start",
+    "start:client": "cd client && yarn start"
+  },
+  "keywords": [
+    "rsa",
+    "encryption",
+    "aes",
+    "public key",
+    "private key"
+  ],
+  "author": "claudivanbarretodasilva@gmailcom",
+  "license": "ISC"
+}

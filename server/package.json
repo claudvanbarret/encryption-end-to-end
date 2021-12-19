@@ -1,0 +1,17 @@
+{
+  "name": "encryption-end-to-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "claudivanbarretodasilva@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.1"
+  },
+  "description": ""
+}
