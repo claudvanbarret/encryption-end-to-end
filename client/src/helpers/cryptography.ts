@@ -1,43 +1,33 @@
-import CryptoJS from "crypto-js";
-import { Buffer } from "buffer";
+import CryptoJS from 'crypto-js';
+import { Buffer } from 'buffer';
 
-const ALGORITHM_RSA = { name: "RSA-OAEP", hash: "SHA-256" };
-const PEM_HEADER = "-----BEGIN PUBLIC KEY-----";
-const PEM_FOOTER = "-----END PUBLIC KEY-----";
+const ALGORITHM_RSA = { name: 'RSA-OAEP', hash: 'SHA-256' };
+const PEM_HEADER = '-----BEGIN PUBLIC KEY-----';
+const PEM_FOOTER = '-----END PUBLIC KEY-----';
 
 const base64StringToArrayBuffer = (b64str: string) => {
-  const byteStr = Buffer.from(b64str, "base64");
+  const byteStr = Buffer.from(b64str, 'base64');
   return byteStr.buffer;
 };
 
 const arrayBufferToBase64String = (arrayBuffer: ArrayBuffer) => {
-  return Buffer.from(arrayBuffer).toString("base64");
+  return Buffer.from(arrayBuffer).toString('base64');
 };
 
 const convertPemToBinary = (pem: string) => {
-  const content = pem.replace(PEM_HEADER, "").replace(PEM_FOOTER, "");
+  const content = pem.replace(PEM_HEADER, '').replace(PEM_FOOTER, '');
 
   return base64StringToArrayBuffer(content);
 };
 
 const importPublicKey = async (pem: string) => {
-  const key = await crypto.subtle.importKey(
-    "spki",
-    convertPemToBinary(pem),
-    ALGORITHM_RSA,
-    true,
-    ["encrypt"]
-  );
+  const key = await crypto.subtle.importKey('spki', convertPemToBinary(pem), ALGORITHM_RSA, true, ['encrypt']);
 
   return key;
 };
 
 const encryptRSA = async (data: string, key: CryptoKey) => {
-  const result = await crypto.subtle.encrypt(
-    { name: "RSA-OAEP" },
-    key,
-    Buffer.from(data)
-  );
+  const result = await crypto.subtle.encrypt({ name: 'RSA-OAEP' }, key, Buffer.from(data));
 
   return arrayBufferToBase64String(result);
 };

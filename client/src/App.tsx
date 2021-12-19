@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import api from "./services/api.service";
-import { encryptByPublicKey, decryptAES } from "./helpers/cryptography";
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import api from './services/api.service';
+import { encryptByPublicKey, decryptAES } from './helpers/cryptography';
 
 interface Chat {
   id: string | number;
@@ -18,13 +18,13 @@ const App = () => {
   const [messages, setMessages] = useState<Message[]>([]);
 
   const getPublicKey = async () => {
-    const { data } = await api.get("/public-key");
+    const { data } = await api.get('/public-key');
     const { publicKey } = data;
-    localStorage.setItem("publicKey", publicKey);
+    localStorage.setItem('publicKey', publicKey);
   };
 
   const encrypt = async (data: string) => {
-    const publicKey = localStorage.getItem("publicKey") || "";
+    const publicKey = localStorage.getItem('publicKey') || '';
 
     const encryptedKey = await encryptByPublicKey(data, publicKey);
 

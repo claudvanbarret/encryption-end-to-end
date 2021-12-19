@@ -1,19 +1,19 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
+const cors = require('cors');
 
-const { privateDecrypt, encryptAES } = require("./utils/cryptography");
-const { publicKey } = require("./keys");
-const chats = require("./mock/chats.json");
+const { privateDecrypt, encryptAES } = require('./utils/cryptography');
+const { publicKey } = require('./keys');
+const chats = require('./mock/chats.json');
 const port = 3001;
 
 app.use(cors());
 
-app.get("/public-key", (req, res) => {
+app.get('/public-key', (req, res) => {
   res.json({ publicKey });
 });
 
-app.get("/chat/:id", (req, res) => {
+app.get('/chat/:id', (req, res) => {
   const { id } = req.params;
   const { key } = req.query;
 
